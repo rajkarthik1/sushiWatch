@@ -37,6 +37,10 @@ class GameScene: SKScene, WCSessionDelegate {
     // Make variables to store current position
     var catPosition = "left"
     var chopstickPositions:[String] = []
+   var lives = 10
+    let lifeLabel = SKLabelNode(text:"Lives: ")
+
+    
         
         func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
             // Output message to terminal
@@ -233,6 +237,13 @@ class GameScene: SKScene, WCSessionDelegate {
         // add cat
         cat.position = CGPoint(x:self.size.width*0.25, y:100)
         addChild(cat)
+        
+        // Life label
+               self.lifeLabel.position.x = 60
+               self.lifeLabel.position.y = size.height - 80
+               self.lifeLabel.fontName = "Avenir"
+               self.lifeLabel.fontSize = 30
+               addChild(lifeLabel)
         
         // add base sushi pieces
         sushiBase.position = CGPoint(x:self.size.width*0.5, y: 100)
