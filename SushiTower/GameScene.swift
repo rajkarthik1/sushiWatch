@@ -40,7 +40,7 @@ class GameScene: SKScene, WCSessionDelegate {
    var lives = 10
     var score = 0
     var time = 25
-    
+    var gamePause = false
 
     let timeLabel = SKLabelNode(text:"Time:")
     let scoreLabel = SKLabelNode(text:"Score: ")
@@ -48,13 +48,18 @@ class GameScene: SKScene, WCSessionDelegate {
     let lifeLabel = SKLabelNode(text:"Lives:")
 
 
-    
-        
         func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
             // Output message to terminal
             print("WATCH: I received a message: \(message)")
 
             let name = message["name"] as! String
+            if(name == "pause"){
+                gamePause = true
+                
+            }
+            if(name == "powerup"){
+                time += 10
+            }
             if(name == "left"){
                         print("TAP LEFT")
                         // 2. person clicked left, so move cat left
@@ -77,8 +82,8 @@ class GameScene: SKScene, WCSessionDelegate {
                             self.sushiTower.remove(at: 0)
 
                 //            // STICK: hide it from screen & remove from game logic
-                //            stickToRemove!.removeFromParent()
-                //            self.chopstickGraphicsArray.remove(at:0)
+                            stickToRemove!.removeFromParent()
+                         self.chopstickGraphicsArray.remove(at:0)
                 //
                 //            // STICK: Update stick positions array:
                 //            self.chopstickPositions.remove(at:0)
@@ -115,9 +120,9 @@ class GameScene: SKScene, WCSessionDelegate {
                             pieceToRemove!.removeFromParent()
                             self.sushiTower.remove(at: 0)
 
-                //            // STICK: hide it from screen & remove from game logic
-                //            stickToRemove!.removeFromParent()
-                //            self.chopstickGraphicsArray.remove(at:0)
+                            // STICK: hide it from screen & remove from game logic
+                            stickToRemove!.removeFromParent()
+                           self.chopstickGraphicsArray.remove(at:0)
                 //
                 //            // STICK: Update stick positions array:
                 //            self.chopstickPositions.remove(at:0)
@@ -220,20 +225,6 @@ class GameScene: SKScene, WCSessionDelegate {
         self.sushiTower.append(sushi)
         
         
-        // -----------------------
-        // MARK: PART 2: ADD CHOPSTICKS TO SUSHI
-        // -----------------------
-        
-        // Generate  a random number (0, 1, 2)
-        // 0 = no stick
-            // ???????
-        // 1 = stick on right
-            // stick.position.x = sushi.position.x + 100
-            // stick.position.y = sushi.position.y - 10
-        // 2 = stick on left
-            // stick.position.x = sushi.position.x - 100
-            // stick.position.y = sushi.position.y - 10
-        
         
         // generate a number between 1 and 2
         let stickPosition = Int.random(in: 1...2)
@@ -317,7 +308,7 @@ class GameScene: SKScene, WCSessionDelegate {
         
         // Time Label
         
-              timeLabel.position.x = 60
+              timeLabel.position.x = 80
               timeLabel.position.y = size.height - 110
              timeLabel.fontName = "Avenir"
               timeLabel.fontSize = 30
@@ -340,7 +331,9 @@ class GameScene: SKScene, WCSessionDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         gameLoop = gameLoop + 1;
-        if(gameLoop % 200 == 0){
+        if(gamePause == false){
+            
+        if(gameLoop % 100 == 0){
             time = time - 1
             timeLabel.text = "TimeRemaining:\(time)"
            
@@ -350,7 +343,8 @@ class GameScene: SKScene, WCSessionDelegate {
 
                    }
     }
-    
+    }
+
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -372,29 +366,18 @@ class GameScene: SKScene, WCSessionDelegate {
         // -------------------------------------
         
         let pieceToRemove = self.sushiTower.first
-        let stickToRemove = self.chopstickGraphicsArray.first
-
-        if (pieceToRemove != nil && stickToRemove != nil) {
+        if (pieceToRemove != nil) {
             // SUSHI: hide it from the screen & remove from game logic
             pieceToRemove!.removeFromParent()
             self.sushiTower.remove(at: 0)
-
-//            // STICK: hide it from screen & remove from game logic
-//            stickToRemove!.removeFromParent()
-//            self.chopstickGraphicsArray.remove(at:0)
-//
-//            // STICK: Update stick positions array:
-//            self.chopstickPositions.remove(at:0)
-
+            
             // SUSHI: loop through the remaining pieces and redraw the Tower
             for piece in sushiTower {
                 piece.position.y = piece.position.y - SUSHI_PIECE_GAP
             }
-
-            // STICK: loop through the remaining sticks and redraw
-            for stick in chopstickGraphicsArray {
-                stick.position.y = stick.position.y - SUSHI_PIECE_GAP
-            }
+            
+            // To make the tower inifnite, then ADD a new piece
+            self.spawnSushi()
         }
         
         // ------------------------------------

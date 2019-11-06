@@ -11,22 +11,34 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="SushiWatch" customModuleProvider="target">
                     <items>
-                        <button width="60" alignment="left" title="LEFT" id="0dJ-iC-281">
+                        <button width="60" height="29" alignment="left" title="LEFT" id="0dJ-iC-281">
                             <color key="backgroundColor" red="0.19141921710000001" green="0.2049901727" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="LeftButton" destination="AgC-eL-Hgc" id="eJ1-ox-skO"/>
                             </connections>
                         </button>
-                        <button width="63" alignment="left" title="RIGHT" id="Qz5-qH-C6V">
+                        <button width="63" height="28" alignment="left" title="RIGHT" id="Qz5-qH-C6V">
                             <color key="backgroundColor" red="0.19141921710000001" green="0.2049901727" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="RightButton" destination="AgC-eL-Hgc" id="6ef-SQ-F9m"/>
                             </connections>
                         </button>
+                        <button width="86" height="28" alignment="left" title="PAUSE" id="c21-pJ-67o">
+                            <color key="backgroundColor" red="0.19141921710000001" green="0.2049901727" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="PauseButton" destination="AgC-eL-Hgc" id="STG-wk-4S8"/>
+                            </connections>
+                        </button>
+                        <button width="90" height="33" alignment="left" title="P.Up🔥" id="lrN-NH-uJw">
+                            <color key="backgroundColor" red="0.87429408649999996" green="0.99864394430000003" blue="0.35560008110000002" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="PowerUp" destination="AgC-eL-Hgc" id="vQj-Vn-Fxm"/>
+                            </connections>
+                        </button>
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="345"/>
+            <point key="canvasLocation" x="220" y="339"/>
         </scene>
     </scenes>
 </document>

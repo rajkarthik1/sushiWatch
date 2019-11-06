@@ -33,7 +33,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                   // ------ SEND MESSAGE TO WATCH CODE GOES HERE
 
                if(WCSession.default.isReachable == true){
-        //            Here is the message you want to send to the watch
+        // Here is the message you want to send to the watch
            let message = ["name":"right"] as [String : Any]
                    WCSession.default.sendMessage(message, replyHandler: nil)
                    }
@@ -41,7 +41,28 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                   print("helloworld")
                    }
     }
+    
+    @IBAction func PauseButton() {
 
+               if(WCSession.default.isReachable == true){
+        // Here is the message you want to send to the watch
+                   let message = ["name":"pause"] as [String : Any]
+                   WCSession.default.sendMessage(message, replyHandler: nil)
+                   }
+                   else {
+                
+                   }
+    }
+    
+    @IBAction func PowerUp() {
+        if(WCSession.default.isReachable == true){
+             // Here is the message you want to send to the watch
+                        let message = ["name":"powerup"] as [String : Any]
+                        WCSession.default.sendMessage(message, replyHandler: nil)
+                        }
+        
+    }
+    
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
            // Output message to terminal
