@@ -24,6 +24,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                    WCSession.default.sendMessage(message, replyHandler: nil)
                    }
                    else {
+                
                    }
     }
     
